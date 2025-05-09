@@ -2,15 +2,19 @@
 
 namespace App\Controller\guest;
 
+// Contrôleur de base Symfony
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+// Pour gérer les réponses HTTP
 use Symfony\Component\HttpFoundation\Response;
+// Pour déclarer les routes
 use Symfony\Component\Routing\Annotation\Route;
 
 class PageController extends AbstractController {
 
-
-#[Route('/', name: 'home' )]
-public function displayHome (): Response {
-    return $this->render('guest/home.html.twig');
-}
+    // Route pour la page d'accueil du site ("/")
+    #[Route('/', name: 'home' )]
+    public function displayHome (): Response {
+        // On rend le template de la page d'accueil
+        return $this->render('guest/home.html.twig');
+    }
 }

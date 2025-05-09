@@ -1,5 +1,11 @@
-<h1>Création d'un produit</h1>
+{% extends 'admin/base.html.twig' %}
 
+{% block metatitle %}
+
+<h1>Création d'un produit</h1>
+{% endblock metatitle %}
+
+{% block main %}
 <form method="POST">
 <label for="title">Titre
 <input type="text" name="title">
@@ -29,3 +35,4 @@
 <button type="submit">Créer le produit</button>
 
 </form>
+{% endblock main %}

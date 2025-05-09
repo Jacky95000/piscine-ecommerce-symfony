@@ -1,0 +1,36 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block metatitle %}
+ Admin | Liste des produits
+{% endblock metatitle %}
+
+{% block main %}
+
+	<table>
+		<tr>
+			<th>Id</th>
+			<th>Titre</th>
+			<th>Prix</th>
+			<th>Catégorie</th>
+			<th>Date de création</th>
+			<th>Date de modification</th>
+		</tr>
+
+
+		{% for product in products %} 
+
+			<tr>
+				<td>{{ product.id }}</td>
+				<td>{{ product.title }}</td>
+				<td>{{ product.price }}</td>
+				<td>{{ product.category.title }}</td>
+				<td>{{ product.createdAt | date('d-m-Y') }}</td>
+				<td>{{ product.updatedAt | date('d-m-Y') }}</td>
+                <td><a href="{{path('admin-delete-product', {'id' : product.id})}}">Supprimer</a></td>
+			</tr>
+
+		{% endfor %}
+
+	</table>
+
+{% endblock main %}

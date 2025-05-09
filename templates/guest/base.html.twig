@@ -7,12 +7,9 @@
         {% block stylesheets %}
         {% endblock %}
 
-        {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
-        {% endblock %}
-    </head>
+        
     <body>
-
+<header>
     <nav>
 
 		<ul>
@@ -20,7 +17,11 @@
 			<li><a href="{{path('list-categories')}}">Catégories</a></li>
 			<li><a href="{{path('list-products')}}">Produits</a></li>
 		</ul>
-
+</nav>
+      </header>
+      {% for message in app.flashes('error') %}
+      <p>{{ message }} </p>
+      {% endfor %}
         
         {% block main %}{% endblock %}
     </body>

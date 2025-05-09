@@ -1,9 +1,9 @@
 body {
-    background-image: url(img/logo1.jpeg);
+    background-image: url(img/logo2.jfif);
    background-size:cover;
     background-repeat: no-repeat;
     box-sizing: border-box;
-    color: yellow;
+    color: white;
 }
 h1 {
     color: goldenrod;

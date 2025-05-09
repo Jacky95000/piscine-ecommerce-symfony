@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\ProductRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Exception;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
 class Product
@@ -34,6 +35,21 @@ class Product
 
     #[ORM\ManyToOne(inversedBy: 'products')]
     private ?Category $category = null;
+
+    public function __construct($title, $description, $price, $isPublished, $category) {
+
+if (strlen($title) < 3) {
+    throw new Exception('Il faut plus de 3 caractères');
+}
+
+        $this->title = $title;
+        $this->description = $description;
+        $this->price = $price;
+        $this->isPublished = $isPublished;
+        $this->category = $category;
+        $this->createdAt = new \DateTimeImmutable();
+        $this->updatedAt = new \DateTimeImmutable();
+    }
 
     public function getId(): ?int
     {
