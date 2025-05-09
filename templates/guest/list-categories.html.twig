@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des catégories</title>
+</head>
+<body>
+
+    <h1>Catégories disponibles</h1>
+
+    <ul>
+        {% for category in categories %}
+            <li>{{ category.title }}</li>
+        {% else %}
+            <li>Aucune catégorie disponible.</li>
+        {% endfor %}
+    </ul>
+
+</body>
+</html>

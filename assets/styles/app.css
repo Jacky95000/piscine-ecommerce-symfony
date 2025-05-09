@@ -1,3 +1,12 @@
 body {
-    background-color: skyblue;
+    background-image: url(img/_01f8b93d-e6fa-4fc1-8016-bcc02c534ca2.jpg);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    box-sizing: border-box;
+}
+h1 {
+    color: goldenrod;
+    text-align: center;
+    font-style: oblique;
+    font-family: 'Times New Roman', Times, serif;
 }
