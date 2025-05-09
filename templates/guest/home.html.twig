@@ -1,19 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ asset('styles/app.css') }}">
-	<title>Document</title>
-</head>
-<body>
-	
+{% extends 'guest/base.html.twig' %}
 
-<main>
+{% block metatitle %}
+	ElectroMénager | Accueil
+{% endblock metatitle %}
 
-<h1>Ecommerce de La Piscine</h1>
-
-</main>
-
-</body>
-</html>
+{% block main %}
+	<h1>Ecommerce de "La Piscine"</h1>
+{% endblock main %}
