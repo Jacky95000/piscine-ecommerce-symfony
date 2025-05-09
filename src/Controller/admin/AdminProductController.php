@@ -20,11 +20,7 @@ class AdminProductController extends AbstractController {
         $description = $request->request->get('description');
         $price = $request->request->get('price');
         $categoryId = $request->request->get('category-id');
-
-        dump($title);
-            dump($description);
-            dump($price);
-            dump($categoryId);
+     
             
 
         if ($request->request->get('is-published') === 'on'){
@@ -32,7 +28,6 @@ class AdminProductController extends AbstractController {
         } else {
             $isPublished = false;
         }
-        dump($isPublished);
 }
 
 $categories = $categoryRepository->findAll();

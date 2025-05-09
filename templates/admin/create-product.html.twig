@@ -1,23 +1,23 @@
 <h1>Création d'un produit</h1>
 
 <form method="POST">
-<label> for="title">Titre
-<input> type="text" name="title">
+<label for="title">Titre
+<input type="text" name="title">
 </label>
 
-<label> for="description">Description
-<input> type="text" name="description">
+<label for="description">Description
+<input type="text" name="description">
 </label>
 
-<label> for="Price">Prix
-<input> type="number" name="price">
+<label for="Price">Prix
+<input type="number" name="price">
 </label>
 
-<label> for="is-published">Publié ?
-<input> type="checkbox" name="is-published">
+<label for="is-published">Publié ?
+<input type="checkbox" name="is-published">
 </label>
 
-<select> name="category-id">
+<select name="category-id">
 
 {% for category in categories %}
 <option value="{{ category.id }}">{{ category.title }}</option>
