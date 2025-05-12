@@ -51,6 +51,23 @@ if (strlen($title) < 3) {
         $this->updatedAt = new \DateTimeImmutable();
     }
 
+
+    public function update($title, $description, $price, $isPublished, $category) {
+
+    if (strlen($title) < 3) {
+        throw new Exception('Titre plus de 3 caractères');
+    }
+    if ($price > 250) {
+        throw new Exception('Le prix doit être inférieur à 250');
+    }
+     $this->title = $title;
+        $this->description = $description;
+        $this->price = $price;
+        $this->isPublished = $isPublished;
+        $this->category = $category;
+
+        $this->updatedAt = new \DateTimeImmutable();
+    }
     public function getId(): ?int
     {
         return $this->id;
@@ -139,4 +156,5 @@ if (strlen($title) < 3) {
 
         return $this;
     }
+
 }

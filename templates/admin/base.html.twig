@@ -16,6 +16,12 @@
 			<li><a href="{{path('admin-create-product')}}">Créer un produit</a></li>
 			
 		</ul>
+
+        
+                <p>Connecté en tant que {{ app.user.email }}</p>
+
+                <a href="{{ path('logout')}}">Se déconnecter</a>
+            
 </nav>
       
         </header>
