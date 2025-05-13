@@ -22,7 +22,7 @@ security:
                 default_target_path: admin-list-products
             logout: 
                 path: logout
-                  
+                target: login  
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
 

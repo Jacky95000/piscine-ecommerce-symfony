@@ -9,8 +9,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class LoginController extends AbstractController {
 
-    #[Route('/login', name: 'login')]
-    public function displayLogin(AuthenticationUtils $authentificationUtils) {
+    #[Route('/login', name: 'login', methods: ['GET', 'POST'])]
+    public function displayLogin(AuthenticationUtils $authentificationUtils): Response {
 
         $error = $authentificationUtils->getLastAuthenticationError();
 
@@ -19,7 +19,7 @@ class LoginController extends AbstractController {
         ]);
     }
 
-    #[Route('/logout', name: "logout")]
+    #[Route('/logout', name: "logout", methods: ['GET'])]
 	public function logout() {
 
 }

@@ -9,18 +9,20 @@ use App\Repository\CategoryRepository;
 use App\Repository\ProductRepository;
 // On importe l'EntityManager pour gérer les entités (enregistrement en BDD)
 use Doctrine\ORM\EntityManagerInterface;
+use Exception;
 // Contrôleur de base de Symfony
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 // Pour récupérer les données de la requête HTTP
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 // Pour définir une route
 use Symfony\Component\Routing\Annotation\Route;
 
 class AdminProductController extends AbstractController {
 
     // On définit la route pour accéder au formulaire de création de produit
-    #[Route('/admin/create-product', name: 'admin-create-product')]
-    public function displayCreateProduct(CategoryRepository $categoryRepository, Request $request, EntityManagerInterface $entityManager) {
+    #[Route('/admin/create-product', name: 'admin-create-product', methods: ['GET', 'POST'])]
+    public function displayCreateProduct(CategoryRepository $categoryRepository, Request $request, EntityManagerInterface $entityManager): Response {
 
         // Si le formulaire est soumis en méthode POST
         if ($request->isMethod('POST')){
@@ -65,8 +67,8 @@ class AdminProductController extends AbstractController {
         ]);
     }
 
-    #[Route('/admin/list-products', name: 'admin-list-products')]
-    public function displayListProducts(ProductRepository $productRepository) {
+    #[Route('/admin/list-products', name: 'admin-list-products', methods: ['GET'])]
+    public function displayListProducts(ProductRepository $productRepository): Response {
         $products = $productRepository->findAll();
 
         return $this->render('admin/product/list-products.html.twig', [
@@ -74,31 +76,44 @@ class AdminProductController extends AbstractController {
         ]);
     }
 
-    #[Route('/admin/delete-product/{id}', name: 'admin-delete-product')]
-    public function deleteProduct($id, ProductRepository $productRepository, EntityManagerInterface $entityManager) {
+    #[Route('/admin/delete-product/{id}', name: 'admin-delete-product', methods: ['GET'])]
+    public function deleteProduct($id, ProductRepository $productRepository, EntityManagerInterface $entityManager): Response {
 
         $product = $productRepository->find($id);
 
+        if(!$product) {
+            return $this->redirectToRoute('admin_404');
+        }
+
+        try {
         $entityManager->remove($product);
         $entityManager->flush();
 
         $this->addFlash('success', 'Produit supprimé');
 
+        } catch(Exception $exception) {
+            $this->addFlash('error', 'Impossible de supprimer le produi');
+        }
+
         return $this->redirectToRoute('admin-list-products');
     }
 
-    #[Route('/admin/update-product/{id}', name: 'admin-update-product')]
-    public function displayUpdateProduct($id, ProductRepository $productRepository, CategoryRepository $categoryRepository, Request $request, EntityManagerInterface $entityManager) {
+    #[Route('/admin/update-product/{id}', name: 'admin-update-product', methods: ['GET', 'POST'])]
+    public function displayUpdateProduct($id, ProductRepository $productRepository, CategoryRepository $categoryRepository, Request $request, EntityManagerInterface $entityManager): Response {
 
         $product = $productRepository->find($id);
 
-        if ($request->isMethod('POST')) {
+        if (!$product) {
+            return $this->redirectToRoute('admin_404');
+        }
+
+        if($request->isMethod('POST')) {
 
             $title = $request->request->get('title');
             $description = $request->request->get('description');
             $price = $request->request->get('price');
             $categoryId = $request->request->get('category-id');
-
+        
             if ($request->request->get('is-published') === 'on') {
                 $isPublished = true;
             } else {
